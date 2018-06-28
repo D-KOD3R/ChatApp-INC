@@ -1,2 +1,7 @@
-<h1>Messages#index</h1>
-<p>Find me in app/views/messages/index.html.erb</p>
+<h1>Chat Room</h1>
+<h3>
+  <%= link_to "New Chat", new_message_path %>
+</h3>
+<div id="messages">
+  <%= render @messages %>
+</div>

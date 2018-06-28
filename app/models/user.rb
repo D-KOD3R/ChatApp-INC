@@ -1,6 +1,4 @@
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
@@ -10,7 +8,9 @@ class User < ApplicationRecord
   validates :role, inclusion: { in: ROLES }
 
 #Associations
-  has_many :recieved_messages, class_name: "Message", foreign_key: "reciever_id"
-  has_many :sent_messages, class_name: "Message", foreign_key: "sender_id"
+  has_many :recieved_messages, class_name: "Message", foreign_key: "reciever_id", dependent: :destroy
+  has_many :sent_messages, class_name: "Message", foreign_key: "sender_id", dependent: :destroy
+#Scopes
+  scope :messagable_users, ->(user_id) { where.not(id: user_id) }
 
 end

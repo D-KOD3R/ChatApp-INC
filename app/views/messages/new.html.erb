@@ -1,2 +1,14 @@
-<h1>Messages#new</h1>
-<p>Find me in app/views/messages/new.html.erb</p>
+<div class="authform">
+  <%= form_for( @message, :html => { :role => 'form'}) do |f| %>
+    <h3>Create a new message</h3>
+    <div class="form-group">
+      <%= f.label :content %>
+      <%= f.text_area :content, :autofocus => true, required: true, class: 'form-control' %>
+    </div>
+    <div class="form-group">
+      <%= f.label :reciever_id , "Reciever Name : "%>
+      <%= f.select :reciever_id, options_for_select(messagables), {include_blank: false}, class: 'form-control' %>
+    </div>
+     <%= f.submit 'Send message', :class => 'button right', prompt: 'true' %>
+  <% end %>
+</div>
